@@ -2,41 +2,43 @@
 
 Submit your final query after each iteration:
 
-## Iteration 1:  Write a query that finds all the users in the collection but returns only their names.
+## Iteration 1
 
 db.users.find({}, {name: 1})
 
-## Iteration 2:  Write a query that finds all the users that currently have insurance.
+## Iteration 2
 
 db.users.find({hasInsurance: {$eq:true}})
 
-## Iteration 3: Write a query that return all users that are 18 years old or older.
+## Iteration 3
 
 db.users.find({age: {$gte: 18}})
 
-## Iteration 4:  Write a query that returns the first user living in Italy. Return only their name and email.
+## Iteration 4
 
+db.users.find({country:{$eq:'Italy'}},{name:1,email:1,_id:0}).limit(1)
 
-
-## Iteration 5: Write a query that returns users living in the USA. Limit the data to 5 users. Return only their names.
+## Iteration 5
 
 db.users.find({ country: {eq:"USA"}}, {name: 1, _id:0}).limit(5).sort({})
 
-## Iteration 6: Write a query that returns those users of whom we have the phone number.
+## Iteration 6
 
 db.users.find({ phone: {exist:true}})
 
-## Iteration 7: Write a query that updates the information of Marissa Geller: her new mail account is "marissa@hotmail.com".
+## Iteration 7
 
+db.users.updateMany({name:'Marissa Geller'},{$set:{email:'marissa@hotmail.com'}})
 
+## Iteration 8
 
-## Iteration 8: Write a query that updates the information of everyone living in the UK. Add to their documents a new field called currency and pass 'pounds' as a value.
+db.users.updateMany({country:'UK'},{$set:{currency:'pounds'}})
 
+## Iteration 9
 
+db.users.find({country:{$eq:'UK'}},{name:1,currency:1,_id:0})
 
-## Iteration 9: Write a query that returns all the users living in the UK. Return only their names and currency.
+## Iteration 10
 
-
-
-## Iteration 10: Write a query that deletes all users that are older that are 45 or older.
+db.users.deleteMany({age:{$gte:45}})
 
